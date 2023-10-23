@@ -1,9 +1,17 @@
+import { useEffect, useState } from "react"
 import { ListGroup, Nav } from "react-bootstrap"
 import { Link, useLoaderData } from "react-router-dom"
 
 function Tournaments() {
-    const tournaments = useLoaderData()
+    const [tournaments, setTournaments] = useState([])
 
+    useEffect(() => {
+        fetch("http://localhost:5000/tournaments/")
+            .then((res) => res.json())
+            .then((res) => {setTournaments(res)})
+            .catch((e) => {console.error(e);})
+    }, [])
+    
     return (
         <>
             <ListGroup>

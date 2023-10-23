@@ -4,8 +4,6 @@ import { useLoaderData } from "react-router-dom"
 function Players() {
     const players = useLoaderData()
 
-    console.log(players);
-
     return (
         <>
             <Table>

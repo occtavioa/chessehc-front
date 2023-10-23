@@ -10,6 +10,9 @@ import Tournament from './routes/Tournament';
 import Error from './routes/Error';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Players from './routes/Players';
+import Pairings from './routes/Pairings';
+import Standings from './routes/Standings';
+import TournamentLayout from './routes/TournamentLayout';
 
 const router = createBrowserRouter([
   {
@@ -24,18 +27,16 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            loader: async () => {
-              return await fetch(new URL ("tournaments", "http://localhost:5000/"))
-            },
             element: <Tournaments />,
           },
           {
-            path: ":id",
             id: "tournament",
+            path: ":id",
             loader: async ({params}) => {
               const {id} = params
-              return await fetch(id, new URL ("tournaments", "http://localhost:5000/")).then((res) => res.json())
+              return await fetch("http://localhost:5000/tournaments/"+id)
             },
+            element: <TournamentLayout />,
             children: [
               {
                 index: true,
@@ -45,9 +46,25 @@ const router = createBrowserRouter([
                 path: "players",
                 loader: async ({params}) => {
                   const {id} = params
-                  return await fetch(new URL("players", new URL(id, new URL ("tournaments", "http://localhost:5000/")))).then((res) => res.json())
+                  return await fetch("http://localhost:5000/tournaments/"+id+"/players/")
                 },
                 element: <Players />
+              },
+              {
+                path: ":roundNumber/pairings",
+                loader: async ({params}) => {
+                  const {id, roundNumber} = params
+                  return await fetch("http://localhost:5000/tournaments/"+id+"/"+roundNumber+"/"+"pairings")
+                },
+                element: <Pairings />
+              },
+              {
+                path: ":roundNumber/standings",
+                loader: async ({params}) => {
+                  const {id, roundNumber} = params
+                  return await fetch("http://localhost:5000/tournaments/"+id+"/"+roundNumber+"/"+"standings")
+                },
+                element: <Standings />
               }
             ]
           }
