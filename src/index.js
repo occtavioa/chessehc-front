@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { RouterProvider, createBrowserRouter, defer } from 'react-router-dom';
 import Home from './routes/Home';
 import Layout from './routes/Layout';
 import Tournaments from './routes/Tournaments';
@@ -27,6 +27,9 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
+            loader: async () => {
+              return defer({tournaments: fetch("http://localhost:5000/tournaments/")})
+            },
             element: <Tournaments />,
           },
           {
