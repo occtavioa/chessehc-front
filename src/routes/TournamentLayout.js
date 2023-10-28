@@ -4,9 +4,8 @@ import { Link, Outlet, useHref, useNavigate, useParams, useRouteLoaderData } fro
 
 function TournamentLayout() {
     let tournament = useRouteLoaderData("tournament")
-    tournament.currentRound = 7
     const {id, roundNumber} = useParams()
-    const [selectedRound, setSelectedRound] = useState(tournament.currentRound)
+    const [selectedRound, setSelectedRound] = useState(tournament.currentRoundNumber)
     const navigate = useNavigate()
     const href = useHref()
 
@@ -26,25 +25,24 @@ function TournamentLayout() {
                     <Nav.Link eventKey={"/tournaments/"+id+"/players"} as={Link} to={"/tournaments/"+id+"/players"}>Jugadores</Nav.Link>
                 </Nav.Item>
                 {
-                    tournament.currentRound ?
-                    <>
-                        <Nav.Item>
-                            <Nav.Link eventKey={"/tournaments/"+id+"/"+selectedRound+"/pairings"} as={Link} to={"/tournaments/"+id+"/"+selectedRound+"/pairings"}>Pareos</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link eventKey={"/tournaments/"+id+"/"+selectedRound+"/standings"} as={Link} to={"/tournaments/"+id+"/"+selectedRound+"/standings"}>Clasificación</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Form.Select value={selectedRound} onChange={(e) => {setSelectedRound(e.target.value)}}>
-                                {
-                                    [...Array(tournament.currentRound)].map((_, i) =>
-                                        <option key={i} value={i+1}>Ronda {i+1}</option>
-                                    )
-                                }
-                            </Form.Select>
-                        </Nav.Item>
-                    </> :
-                    <></>
+                    tournament.currentRoundNumber &&
+                        <>
+                            <Nav.Item>
+                                <Nav.Link eventKey={"/tournaments/"+id+"/"+selectedRound+"/pairings"} as={Link} to={"/tournaments/"+id+"/"+selectedRound+"/pairings"}>Pareos</Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <Nav.Link eventKey={"/tournaments/"+id+"/"+selectedRound+"/standings"} as={Link} to={"/tournaments/"+id+"/"+selectedRound+"/standings"}>Clasificación</Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <Form.Select value={selectedRound} onChange={(e) => {setSelectedRound(e.target.value)}}>
+                                    {
+                                        [...Array(tournament.currentRoundNumber)].map((_, i) =>
+                                            <option key={i} value={i+1}>Ronda {i+1}</option>
+                                        )
+                                    }
+                                </Form.Select>
+                            </Nav.Item>
+                        </>
                 }
             </Nav>
             <Outlet />

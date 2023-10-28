@@ -28,7 +28,7 @@ const router = createBrowserRouter([
           {
             index: true,
             loader: async () => {
-              return defer({tournaments: fetch("http://localhost:5000/tournaments/")})
+              return defer({tournaments: fetch("http://localhost:5000/tournaments/").then((res) => res.json())})
             },
             element: <Tournaments />,
           },
