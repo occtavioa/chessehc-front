@@ -16,8 +16,8 @@ function Tournaments() {
                         <ListGroup>
                             {
                                 tournaments.map((tournament) => 
-                                    <ListGroup.Item key={tournament.id}>
-                                        <Nav.Link as={Link} to={`${tournament.id}`}>
+                                    <ListGroup.Item key={tournament._id}>
+                                        <Nav.Link as={Link} to={`${tournament._id}`}>
                                             {tournament.name}
                                         </Nav.Link>
                                     </ListGroup.Item>

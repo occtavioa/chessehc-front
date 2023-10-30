@@ -37,7 +37,7 @@ const router = createBrowserRouter([
             path: ":id",
             loader: async ({params}) => {
               const {id} = params
-              return defer({tournament: fetch("http://localhost:5000/tournaments/"+id).then((res => {if(res.ok) {return res.json()} else {throw new Error(res.statusText)}}))})
+              return await fetch("http://localhost:5000/tournaments/"+id).then((res => {if(res.ok) {return res.json()} else {throw new Error(res.statusText)}}))
             },
             element: <TournamentLayout />,
             children: [
@@ -49,7 +49,7 @@ const router = createBrowserRouter([
                 path: "players",
                 loader: async ({params}) => {
                   const {id} = params
-                  return await fetch("http://localhost:5000/tournaments/"+id+"/players/")
+                  return await fetch("http://localhost:5000/tournaments/"+id+"/players/").then((res => {if(res.ok) {return res.json()} else {throw new Error(res.statusText)}}))
                 },
                 element: <Players />
               },

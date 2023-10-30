@@ -2,7 +2,7 @@ import { Container, Row, Table } from "react-bootstrap";
 import { useLoaderData, useRouteLoaderData } from "react-router-dom"
 
 function Tournament() {
-    const tournament = useLoaderData();
+    const tournament = useRouteLoaderData("tournament");
 
     return (
         <>
