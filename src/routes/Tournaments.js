@@ -9,7 +9,8 @@ function Tournaments() {
     return (
         <>
             <Suspense fallback={<>Loading...</>}>
-                <Await resolve={tournaments}
+                <Await
+                    resolve={tournaments}
                     errorElement={<>Error loading tournaments</>}
                 >
                     {

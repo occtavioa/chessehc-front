@@ -7,7 +7,7 @@ import Home from './routes/Home';
 import Layout from './routes/Layout';
 import Tournaments from './routes/Tournaments';
 import Tournament from './routes/Tournament';
-import Error from './routes/Error';
+import ErrorRoute from './routes/ErrorRoute';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Players from './routes/Players';
 import Pairings from './routes/Pairings';
@@ -74,7 +74,7 @@ const router = createBrowserRouter([
         ]
       },
     ],
-    errorElement: <Error />
+    errorElement: <ErrorRoute />
   }
 ])
 
