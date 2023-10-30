@@ -12,21 +12,20 @@ function Tournaments() {
                 <Await
                     resolve={tournaments}
                     errorElement={<>Error loading tournaments</>}
-                >
-                    {
-                        (tournaments) => 
-                            <ListGroup>
-                                {
-                                    tournaments.map((tournament) => 
-                                        <ListGroup.Item key={tournament.id}>
-                                            <Nav.Link as={Link} to={`${tournament.id}`}>
-                                                {tournament.name}
-                                            </Nav.Link>
-                                        </ListGroup.Item>
-                                    )
-                                }
-                            </ListGroup>
+                    children={(tournaments) => 
+                        <ListGroup>
+                            {
+                                tournaments.map((tournament) => 
+                                    <ListGroup.Item key={tournament.id}>
+                                        <Nav.Link as={Link} to={`${tournament.id}`}>
+                                            {tournament.name}
+                                        </Nav.Link>
+                                    </ListGroup.Item>
+                                )
+                            }
+                        </ListGroup>
                     }
+                >
                 </Await>
             </Suspense>
         </>

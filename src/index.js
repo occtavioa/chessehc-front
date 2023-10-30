@@ -28,7 +28,7 @@ const router = createBrowserRouter([
           {
             index: true,
             loader: async () => {
-              return defer({tournaments: fetch("http://localhost:5000/tournaments/")})
+              return defer({tournaments: fetch("http://localhost:5000/tournaments").then((res => {if(res.ok) {return res.json()} else {throw new Error(res.statusText)}}))})
             },
             element: <Tournaments />,
           },
@@ -37,7 +37,7 @@ const router = createBrowserRouter([
             path: ":id",
             loader: async ({params}) => {
               const {id} = params
-              return await fetch("http://localhost:5000/tournaments/"+id)
+              return defer({tournament: fetch("http://localhost:5000/tournaments/"+id).then((res => {if(res.ok) {return res.json()} else {throw new Error(res.statusText)}}))})
             },
             element: <TournamentLayout />,
             children: [
@@ -54,18 +54,18 @@ const router = createBrowserRouter([
                 element: <Players />
               },
               {
-                path: ":roundNumber/pairings",
+                path: "pairings/:roundNumber",
                 loader: async ({params}) => {
                   const {id, roundNumber} = params
-                  return await fetch("http://localhost:5000/tournaments/"+id+"/"+roundNumber+"/"+"pairings")
+                  return await fetch("http://localhost:5000/tournaments/"+id+"/pairings/"+roundNumber)
                 },
                 element: <Pairings />
               },
               {
-                path: ":roundNumber/standings",
+                path: "standings/:roundNumber",
                 loader: async ({params}) => {
                   const {id, roundNumber} = params
-                  return await fetch("http://localhost:5000/tournaments/"+id+"/"+roundNumber+"/"+"standings")
+                  return await fetch("http://localhost:5000/tournaments/"+id+"/standings/"+roundNumber)
                 },
                 element: <Standings />
               }
