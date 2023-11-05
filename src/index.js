@@ -2,12 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import { RouterProvider, createBrowserRouter, defer } from 'react-router-dom';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Home from './routes/Home';
 import Layout from './routes/Layout';
 import Tournaments from './routes/Tournaments';
 import Tournament from './routes/Tournament';
-import Error from './routes/Error';
+import ErrorRoute from './routes/ErrorRoute';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Players from './routes/Players';
 import Pairings from './routes/Pairings';
@@ -28,7 +28,7 @@ const router = createBrowserRouter([
           {
             index: true,
             loader: async () => {
-              return defer({tournaments: fetch("http://localhost:5000/tournaments/").then((res) => res.json())})
+              return await fetch("http://localhost:5000/tournaments")
             },
             element: <Tournaments />,
           },
@@ -49,7 +49,8 @@ const router = createBrowserRouter([
                 path: "players",
                 loader: async ({params}) => {
                   const {id} = params
-                  return await fetch("http://localhost:5000/tournaments/"+id+"/players/")
+                  const players = await fetch("http://localhost:5000/tournaments/"+id+"/players")
+                  return players
                 },
                 element: <Players />
               },
@@ -57,7 +58,7 @@ const router = createBrowserRouter([
                 path: ":roundNumber/pairings",
                 loader: async ({params}) => {
                   const {id, roundNumber} = params
-                  return await fetch("http://localhost:5000/tournaments/"+id+"/"+roundNumber+"/"+"pairings")
+                  return await fetch("http://localhost:5000/tournaments/"+id+"/pairings/"+roundNumber)
                 },
                 element: <Pairings />
               },
@@ -65,7 +66,7 @@ const router = createBrowserRouter([
                 path: ":roundNumber/standings",
                 loader: async ({params}) => {
                   const {id, roundNumber} = params
-                  return await fetch("http://localhost:5000/tournaments/"+id+"/"+roundNumber+"/"+"standings")
+                  return await fetch("http://localhost:5000/tournaments/"+id+"/standings/"+roundNumber)
                 },
                 element: <Standings />
               }
@@ -74,7 +75,7 @@ const router = createBrowserRouter([
         ]
       },
     ],
-    errorElement: <Error />
+    errorElement: <ErrorRoute />
   }
 ])
 

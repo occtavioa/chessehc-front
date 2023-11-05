@@ -1,5 +1,5 @@
-import { Container, Row, Table } from "react-bootstrap";
-import { useLoaderData, useRouteLoaderData } from "react-router-dom"
+import { Table } from "react-bootstrap";
+import { useRouteLoaderData } from "react-router-dom"
 
 function Tournament() {
     const tournament = useRouteLoaderData("tournament");
@@ -19,7 +19,7 @@ function Tournament() {
                             {tournament.name}
                         </td>
                         <td>
-                            {tournament.numberRounds}
+                            {tournament.numberOfRounds}
                         </td>
                     </tr>
                 </tbody>

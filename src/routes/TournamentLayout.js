@@ -3,9 +3,9 @@ import { Form, Nav } from "react-bootstrap";
 import { Link, Outlet, useHref, useNavigate, useParams, useRouteLoaderData } from "react-router-dom";
 
 function TournamentLayout() {
-    let tournament = useRouteLoaderData("tournament")
+    const tournament = useRouteLoaderData("tournament")
     const {id, roundNumber} = useParams()
-    const [selectedRound, setSelectedRound] = useState(tournament.currentRoundNumber)
+    const [selectedRound, setSelectedRound] = useState(tournament.currentRound)
     const navigate = useNavigate()
     const href = useHref()
 
@@ -25,7 +25,7 @@ function TournamentLayout() {
                     <Nav.Link eventKey={"/tournaments/"+id+"/players"} as={Link} to={"/tournaments/"+id+"/players"}>Jugadores</Nav.Link>
                 </Nav.Item>
                 {
-                    tournament.currentRoundNumber &&
+                    tournament.currentRound &&
                         <>
                             <Nav.Item>
                                 <Nav.Link eventKey={"/tournaments/"+id+"/"+selectedRound+"/pairings"} as={Link} to={"/tournaments/"+id+"/"+selectedRound+"/pairings"}>Pareos</Nav.Link>
@@ -36,7 +36,7 @@ function TournamentLayout() {
                             <Nav.Item>
                                 <Form.Select value={selectedRound} onChange={(e) => {setSelectedRound(e.target.value)}}>
                                     {
-                                        [...Array(tournament.currentRoundNumber)].map((_, i) =>
+                                        [...Array(tournament.currentRound)].map((_, i) =>
                                             <option key={i} value={i+1}>Ronda {i+1}</option>
                                         )
                                     }

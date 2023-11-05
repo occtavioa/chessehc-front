@@ -1,7 +1,12 @@
+import { useLoaderData } from "react-router-dom"
+import PlayersTable from "../components/PlayersTable";
+
 function Standings() {
+    const standings = useLoaderData()
+
     return (
         <>
-            Standings
+            <PlayersTable players={standings}/>
         </>
     )
 }

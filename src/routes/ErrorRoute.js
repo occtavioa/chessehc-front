@@ -1,7 +1,7 @@
 import { Alert } from "react-bootstrap";
 import Navbar from "../components/Navbar";
 
-function Error() {
+function ErrorRoute() {
     return (
         <>
             <Navbar />
@@ -10,4 +10,4 @@ function Error() {
     )
 }
 
-export default Error
+export default ErrorRoute
