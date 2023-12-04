@@ -1,3 +1,4 @@
+import { Alert } from "react-bootstrap";
 import { useLoaderData } from "react-router-dom"
 import PlayersTable from "../components/PlayersTable";
 
@@ -6,7 +7,11 @@ function Players() {
 
     return (
         <>
-            <PlayersTable players={players}/>
+            {
+                players.length === 0
+                ? <Alert variant="light">No players added</Alert>
+                : <PlayersTable players={players}/>
+            }
         </>
     )
 }

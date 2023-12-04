@@ -1,4 +1,4 @@
-import { Alert, Badge, Button, ListGroup, Nav } from "react-bootstrap"
+import { Alert, Badge, Button, Col, ListGroup, Nav, Row } from "react-bootstrap"
 import { Link } from "react-router-dom"
 
 function TournamentsList({tournaments}) {
@@ -7,20 +7,26 @@ function TournamentsList({tournaments}) {
             {
                 tournaments.map((tournament) => 
                     <ListGroup.Item key={tournament.Id}>
-                        {tournament.Name}
-                        {
-                            tournament.CurrentRound === null
-                            ? <Badge bg="danger">Not started - 0 / {tournament.NumberOfRounds}</Badge>
-                            : tournament.CurrentRound < tournament.NumberOfRounds
-                                ? <Badge bg="warning">Ongoing - {tournament.CurrentRound} / {tournament.NumberOfRounds}</Badge>
-                                : <Badge bg="success">Finished - {tournament.NumberOfRounds} / {tournament.NumberOfRounds}</Badge>
-                        }
-                        <Button>
-                            <i className="bi bi-arrow-right-circle-fill"></i>
-                            <Nav.Link as={Link} to={`/tournaments/${tournament.Id}`}>
-                                See tournament
-                            </Nav.Link>
-                        </Button>
+                        <Row className="justify-items-center">
+                            <Col>
+                                {tournament.Name}
+                            </Col>
+                            <Col>
+                                {
+                                    tournament.CurrentRound === null
+                                    ? <Badge bg="danger">Not started - 0 / {tournament.NumberOfRounds}</Badge>
+                                    : tournament.CurrentRound < tournament.NumberOfRounds
+                                        ? <Badge bg="warning">Ongoing - {tournament.CurrentRound} / {tournament.NumberOfRounds}</Badge>
+                                        : <Badge bg="success">Finished - {tournament.NumberOfRounds} / {tournament.NumberOfRounds}</Badge>
+                                }
+                            </Col>
+                            <Col>
+                                <Button as={Link} to={`/tournaments/${tournament.Id}`}>
+                                    See tournament
+                                    <i className="bi bi-arrow-right-circle-fill"></i>
+                                </Button>
+                            </Col>
+                        </Row>
                     </ListGroup.Item>
                 )
             }

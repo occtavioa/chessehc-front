@@ -16,10 +16,10 @@ function Tournament() {
                 <tbody>
                     <tr>
                         <td>
-                            {tournament.name}
+                            {tournament.Name}
                         </td>
                         <td>
-                            {tournament.numberOfRounds}
+                            {tournament.NumberOfRounds}
                         </td>
                     </tr>
                 </tbody>

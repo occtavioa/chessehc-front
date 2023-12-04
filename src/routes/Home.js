@@ -6,7 +6,7 @@ function Home() {
     const tournaments = useLoaderData()
 
     return (
-        <Container>
+        <>
             {
                 tournaments.length === 0
                 ? <Alert variant="light">No tournaments found</Alert>
@@ -15,7 +15,7 @@ function Home() {
                     <TournamentsList tournaments={tournaments}/>
                 </>
             }
-        </Container>
+        </>
     )
 }
 

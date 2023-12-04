@@ -54,7 +54,7 @@ const router = createBrowserRouter([
                 path: "players",
                 loader: async ({params}) => {
                   const {id} = params
-                  const players = await fetch("http://localhost:5000/tournaments/"+id+"/players")
+                  const players = await fetch("http://localhost:5000/players/"+id).then((res => {if(res.ok) {return res.json()} else {throw new Error(res.statusText)}}))
                   return players
                 },
                 element: <Players />
@@ -63,7 +63,9 @@ const router = createBrowserRouter([
                 path: "pairings/:roundNumber",
                 loader: async ({params}) => {
                   const {id, roundNumber} = params
-                  return await fetch("http://localhost:5000/tournaments/"+id+"/pairings/"+roundNumber)
+                  const games = await fetch("http://localhost:5000/games/"+id+"?round="+roundNumber).then((res => {if(res.ok) {return res.json()} else {throw new Error(res.statusText)}}));
+                  const byes = await fetch("http://localhost:5000/byes/"+id+"?round="+roundNumber).then((res => {if(res.ok) {return res.json()} else {throw new Error(res.statusText)}}));
+                  return {games, byes}
                 },
                 element: <Pairings />
               },
@@ -71,7 +73,7 @@ const router = createBrowserRouter([
                 path: "standings/:roundNumber",
                 loader: async ({params}) => {
                   const {id, roundNumber} = params
-                  return await fetch("http://localhost:5000/tournaments/"+id+"/standings/"+roundNumber)
+                  return await fetch("http://localhost:5000/standings/"+id+"?round="+roundNumber).then((res => {if(res.ok) {return res.json()} else {throw new Error(res.statusText)}}))
                 },
                 element: <Standings />
               }
