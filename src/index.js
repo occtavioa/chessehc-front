@@ -9,6 +9,7 @@ import Tournaments from './routes/Tournaments';
 import Tournament from './routes/Tournament';
 import ErrorRoute from './routes/ErrorRoute';
 import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
 import Players from './routes/Players';
 import Pairings from './routes/Pairings';
 import Standings from './routes/Standings';
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+        loader: async () => {
+          const tournaments = await fetch("http://localhost:5000/tournaments").then((res) => res.json())
+          return tournaments.splice(0, 6)
+        }
       },
       {
         path: "tournaments",
