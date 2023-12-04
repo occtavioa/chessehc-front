@@ -5,7 +5,7 @@ import { Await, Link, Outlet, useHref, useLoaderData, useNavigate, useParams, us
 function TournamentLayout() {
     const tournament = useRouteLoaderData("tournament")
     const {id, roundNumber} = useParams()
-    const [selectedRound, setSelectedRound] = useState(tournament.currentRound)
+    const [selectedRound, setSelectedRound] = useState(tournament.CurrentRound)
     const navigate = useNavigate()
     const href = useHref()
 
@@ -17,7 +17,7 @@ function TournamentLayout() {
 
     return (
         <>
-            <Nav variant="tabs" defaultActiveKey={href}>
+                <Nav variant="tabs" defaultActiveKey={href} className="mb-1">
                 <Nav.Item>
                     <Nav.Link eventKey={"/tournaments/" + id} as={Link} to={"/tournaments/" + id}>Torneo</Nav.Link>
                 </Nav.Item>
@@ -25,7 +25,7 @@ function TournamentLayout() {
                     <Nav.Link eventKey={"/tournaments/" + id + "/players"} as={Link} to={"/tournaments/" + id + "/players"}>Jugadores</Nav.Link>
                 </Nav.Item>
                 {
-                    tournament.currentRound &&
+                    tournament.CurrentRound &&
                         <>
                             <Nav.Item>
                                 <Nav.Link eventKey={"/tournaments/"+id+"/pairings/"+selectedRound} as={Link} to={"/tournaments/"+id+"/pairings/"+selectedRound}>Pareos</Nav.Link>
@@ -36,7 +36,7 @@ function TournamentLayout() {
                             <Nav.Item>
                                 <Form.Select value={selectedRound} onChange={(e) => {setSelectedRound(e.target.value)}}>
                                     {
-                                        [...Array(tournament.currentRound)].map((_, i) =>
+                                        [...Array(tournament.CurrentRound)].map((_, i) =>
                                             <option key={i} value={i+1}>Ronda {i+1}</option>
                                         )
                                     }
