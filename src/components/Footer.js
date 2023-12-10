@@ -3,16 +3,7 @@ import { Link } from "react-router-dom"
 
 function Footer() {
     return (
-        <Navbar bg="light" className="fixed-bottom">
-            <Row>
-                <Col sm={12}>
-                    Contact 47292048@est.ort.edu.ar
-                </Col>
-                <hr></hr>
-                <Col sm={12}>
-                    ChessehC - 2023
-                </Col>
-            </Row>
+        <Navbar bg="light" className="fixed-bottom mt-5">
         </Navbar>
     )
 }

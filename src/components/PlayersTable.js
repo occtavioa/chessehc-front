@@ -15,12 +15,12 @@ function PlayersTable({players}) {
             <tbody>
                 {
                     players.map((player) => 
-                        <tr key={player.id}>
-                            <td>{player.id}</td>
-                            <td>{player.rating}</td>
-                            <td>{player.title ?? "-"}</td>
-                            <td>{player.name}</td>
-                            <td>{player.points}</td>
+                        <tr key={player.Id}>
+                            <td>{player.Id}</td>
+                            <td>{player.Rating}</td>
+                            <td>{player.Title ?? "-"}</td>
+                            <td>{player.Name}</td>
+                            <td>{player.Points}</td>
                         </tr>
                     )
                 }

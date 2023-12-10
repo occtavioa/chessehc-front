@@ -4,6 +4,9 @@ import { useLoaderData } from "react-router-dom"
 function Pairings() {
     const {games, byes} = useLoaderData()
 
+    console.log("game:", games);
+    console.log("byes:", byes);
+    
     return (
         <>
             <Table>
@@ -24,16 +27,16 @@ function Pairings() {
                 <tbody>
                     {
                         games.map(g =>
-                            <tr key={g.id}>
-                                <td>{g.white.id}</td>
-                                <td>{g.white.rating}</td>
-                                <td>{g.white.title}</td>
-                                <td>{g.white.name}</td>
-                                <td>{g.whitePoint} - {g.blackPoint}</td>
-                                <td>{g.black.id}</td>
-                                <td>{g.black.rating}</td>
-                                <td>{g.black.title}</td>
-                                <td>{g.black.name}</td>
+                            <tr key={g.Id}>
+                                <td>{g.white.Id}</td>
+                                <td>{g.white.Rating}</td>
+                                <td>{g.white.Title ?? "-"}</td>
+                                <td>{g.white.Name}</td>
+                                <td>{g.WhitePoint} - {g.BlackPoint}</td>
+                                <td>{g.black.Id}</td>
+                                <td>{g.black.Rating}</td>
+                                <td>{g.black.Title ?? "-"}</td>
+                                <td>{g.black.Name}</td>
                             </tr>
                         )
                     }
@@ -54,11 +57,11 @@ function Pairings() {
                     {
                         byes.map((b, i) =>
                             <tr key={i}>
-                                <td>{b.player.id}</td>
-                                <td>{b.player.rating}</td>
-                                <td>{b.player.title}</td>
-                                <td>{b.player.name}</td>
-                                <td>{b.byePoint}</td>
+                                <td>{b.player.Id}</td>
+                                <td>{b.player.Rating}</td>
+                                <td>{b.player.Title ?? "-"}</td>
+                                <td>{b.player.Name}</td>
+                                <td>{b.ByePoint}</td>
                             </tr>
                         )
                     }

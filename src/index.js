@@ -63,8 +63,8 @@ const router = createBrowserRouter([
                 path: "pairings/:roundNumber",
                 loader: async ({params}) => {
                   const {id, roundNumber} = params
-                  const games = await fetch("http://localhost:5000/games/"+id+"?round="+roundNumber).then((res => {if(res.ok) {return res.json()} else {throw new Error(res.statusText)}}));
-                  const byes = await fetch("http://localhost:5000/byes/"+id+"?round="+roundNumber).then((res => {if(res.ok) {return res.json()} else {throw new Error(res.statusText)}}));
+                  const games = await fetch("http://localhost:5000/games/"+id+"?round="+roundNumber).then((res => {if(res.ok || res.status === 404) {return res.ok ? res.json() : []} else {throw new Error(res.statusText)}}));
+                  const byes = await fetch("http://localhost:5000/byes/"+id+"?round="+roundNumber).then((res => {if(res.ok || res.status === 404) {return res.ok ? res.json() : []} else {throw new Error(res.statusText)}}));
                   return {games, byes}
                 },
                 element: <Pairings />
