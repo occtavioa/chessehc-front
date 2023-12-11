@@ -1,10 +1,13 @@
-import { Col, Container, Image, Nav, Navbar, Row } from "react-bootstrap"
+import { Col, Container, Image, Nav, Navbar, Row, Stack } from "react-bootstrap"
 import { Link } from "react-router-dom"
 
 function Footer() {
     return (
-        <Navbar bg="light" className="fixed-bottom mt-5">
-        </Navbar>
+        <Stack>
+            <h5>ChessehC - 2023</h5>
+            <hr></hr>
+            <p>Contact: 47292048@est.ort.edu.ar</p>
+        </Stack>
     )
 }
 
